@@ -9,4 +9,4 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- Keep Tomato Toss as a client-side single-page interaction with local object URLs for imported photos, because uploaded targets need not leave the user's device.
+- Keep Fruit Toss as a client-side single-page interaction with the fixed uploaded target and local hit state, because the game needs no server or photo-changing controls.
