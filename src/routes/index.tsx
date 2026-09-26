@@ -5,14 +5,27 @@ import { Button } from "@/components/ui/button";
 import defaultPhoto from "@/assets/tomato-target.png.asset.json";
 
 const fruits = [
-  { id: "tomato", label: "Tomato", emoji: "🍅" },
-  { id: "orange", label: "Orange", emoji: "🍊" },
-  { id: "lemon", label: "Lemon", emoji: "🍋" },
-  { id: "strawberry", label: "Berry", emoji: "🍓" },
+  { id: "tomato", label: "Tomato" },
+  { id: "orange", label: "Orange" },
+  { id: "lemon", label: "Lemon" },
+  { id: "strawberry", label: "Berry" },
 ] as const;
 type FruitId = typeof fruits[number]["id"];
 type Hit = { id: number; x: number; y: number; rotation: number; fruit: FruitId };
-type Throw = { id: number; x: number; y: number; emoji: string };
+type Throw = { id: number; x: number; y: number; fruit: FruitId };
+
+function FruitIcon({ fruit }: { fruit: FruitId }) {
+  return (
+    <svg viewBox="0 0 48 48" className={`fruit-icon fruit-${fruit}`} aria-hidden="true">
+      {fruit === "lemon" ? <path className="fruit-body" d="M7 26c-2-2-2-6 1-8 5-3 7-9 19-9 11 0 15 6 16 13 1 8-5 16-17 17-8 1-15-2-18-8-1-2-3-2-1-5z" /> : fruit === "strawberry" ? <path className="fruit-body" d="M24 12C14 7 7 15 10 25c3 10 11 18 14 19 4-1 12-9 15-19 3-10-5-18-15-13z" /> : <path className="fruit-body" d="M24 10c12 0 20 8 20 19 0 10-9 16-20 16S4 39 4 29C4 18 12 10 24 10z" />}
+      {fruit === "tomato" && <path className="fruit-leaf" d="M23 4l2 8 8-4-3 7 9 1-9 3-5 6-4-7-10 1 7-6-6-5 9 3z" />}
+      {fruit === "orange" && <><path className="fruit-leaf" d="M25 11c2-8 9-9 14-6-2 6-7 9-14 9z" /><path className="fruit-detail" d="M24 13v-5" /></>}
+      {fruit === "lemon" && <path className="fruit-detail" d="M13 29c2 4 5 6 9 6" />}
+      {fruit === "strawberry" && <><path className="fruit-leaf" d="M24 15c-5-5-10-4-15-2l7 5-2 5 10-4 10 4-2-5 7-5c-6-2-10-3-15 2z" /><path className="fruit-detail" d="M24 13V6" /><circle className="fruit-seed" cx="19" cy="27" r="1.2" /><circle className="fruit-seed" cx="29" cy="27" r="1.2" /><circle className="fruit-seed" cx="24" cy="34" r="1.2" /></>}
+      <path className="fruit-shine" d="M12 22c2-5 5-7 9-8" />
+    </svg>
+  );
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -53,9 +66,8 @@ function Index() {
     const area = photoArea.current;
     if (!area || health === 0) return;
     const id = ++nextId.current;
-    const fruit = fruits.find(item => item.id === selectedFruit) ?? fruits[0];
     setHits(current => [...current, { id, x, y, rotation: Math.round(Math.random() * 360), fruit: selectedFruit }]);
-    setThrowing({ id, x: (x / 100 - .5) * area.clientWidth, y: -(1 - y / 100) * area.clientHeight + 20, emoji: fruit.emoji });
+    setThrowing({ id, x: (x / 100 - .5) * area.clientWidth, y: -(1 - y / 100) * area.clientHeight + 20, fruit: selectedFruit });
     setHitShake(true);
     window.setTimeout(() => setThrowing(current => current?.id === id ? null : current), 430);
     window.setTimeout(() => setHitShake(false), 300);
@@ -115,7 +127,7 @@ function Index() {
                 <img src={defaultPhoto.url} alt="Fruit toss target" className="pointer-events-none h-full w-full select-none object-cover object-center" draggable={false} />
                 <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-foreground/15" />
                 {hits.map(hit => <span key={hit.id} className={`tomato-mark splat-${hit.fruit}`} style={{ left: `${hit.x}%`, top: `${hit.y}%`, "--rotation": `${hit.rotation}deg` } as CSSProperties}><Splat /></span>)}
-                {throwing && <span className="throw-tomato" aria-hidden="true" style={{ "--throw-x": `${throwing.x}px`, "--throw-y": `${throwing.y}px` } as CSSProperties}>{throwing.emoji}</span>}
+                {throwing && <span className="throw-tomato" aria-hidden="true" style={{ "--throw-x": `${throwing.x}px`, "--throw-y": `${throwing.y}px` } as CSSProperties}><FruitIcon fruit={throwing.fruit} /></span>}
                 {health === 0 && <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center bg-stage/60"><span className="-rotate-6 border-4 border-highlight bg-stage px-5 py-3 font-display text-3xl uppercase text-highlight shadow-lg sm:text-5xl">Knockout!</span></div>}
               </div>
             </div>
@@ -130,12 +142,12 @@ function Index() {
                 <p className="mb-1 text-xs font-extrabold uppercase tracking-[.18em] text-muted-foreground">Fruits thrown</p>
                 <p className="font-display text-6xl leading-none tabular-nums text-highlight lg:mt-3 lg:text-8xl" aria-live="polite">{String(hits.length).padStart(2, "0")}</p>
               </div>
-              <span className="pb-1 text-3xl lg:mt-4 lg:block" aria-hidden="true">{fruits.find(item => item.id === selectedFruit)?.emoji}</span>
+              <span className="w-9 pb-1 lg:mt-4 lg:block" aria-hidden="true"><FruitIcon fruit={selectedFruit} /></span>
             </div>
             <div>
               <p className="mb-3 text-xs font-extrabold uppercase tracking-[.18em] text-muted-foreground">Choose your fruit</p>
               <div className="grid grid-cols-4 gap-2">
-                {fruits.map(fruit => <Button key={fruit.id} type="button" variant={selectedFruit === fruit.id ? "tomato" : "utility"} aria-pressed={selectedFruit === fruit.id} aria-label={fruit.label} title={fruit.label} onClick={() => setSelectedFruit(fruit.id)} className="flex h-[66px] min-w-0 flex-col gap-0.5 rounded-sm px-1 text-[10px] font-bold uppercase sm:h-[72px]"><span className="text-2xl leading-none" aria-hidden="true">{fruit.emoji}</span>{fruit.label}</Button>)}
+                {fruits.map(fruit => <Button key={fruit.id} type="button" variant={selectedFruit === fruit.id ? "tomato" : "utility"} aria-pressed={selectedFruit === fruit.id} aria-label={fruit.label} title={fruit.label} onClick={() => setSelectedFruit(fruit.id)} className="flex h-[66px] min-w-0 flex-col gap-0.5 rounded-sm px-1 text-[10px] font-bold uppercase sm:h-[72px]"><span className="size-7" aria-hidden="true"><FruitIcon fruit={fruit.id} /></span>{fruit.label}</Button>)}
               </div>
             </div>
             <Button variant="utility" size="lg" className="h-12 w-full rounded-sm px-3 text-sm" onClick={() => { setHits([]); setThrowing(null); }} disabled={hits.length === 0}><RotateCcw /> Start over</Button>
