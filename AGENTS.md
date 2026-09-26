@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep Tomato Toss as a client-side single-page interaction with local object URLs for imported photos, because uploaded targets need not leave the user's device.
