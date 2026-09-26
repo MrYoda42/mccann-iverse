@@ -16,6 +16,8 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        tomato: "bg-primary text-primary-foreground border border-primary hover:bg-primary/85 font-bold uppercase tracking-wide shadow-[4px_4px_0_var(--color-ink)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0_var(--color-ink)]",
+        utility: "border border-border bg-secondary text-secondary-foreground hover:bg-muted",
       },
       size: {
         default: "h-9 px-4 py-2",
