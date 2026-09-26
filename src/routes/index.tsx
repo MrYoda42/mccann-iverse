@@ -93,7 +93,7 @@ function Index() {
       <div className="mx-auto max-w-[1400px] px-5 pb-10 pt-6 sm:px-9 lg:px-14 lg:pt-9">
         <header className="flex items-center justify-between gap-4 border-b border-border pb-5">
           <div className="flex items-center gap-3">
-            <span className="flex size-10 items-center justify-center rounded-full border-2 border-highlight text-2xl" aria-hidden="true">🍅</span>
+            <span className="flex size-10 items-center justify-center rounded-full border-2 border-highlight text-highlight" aria-hidden="true"><Target size={22} strokeWidth={2.5} /></span>
             <span className="font-display text-base uppercase sm:text-xl">Tomato Toss<span className="text-primary">.</span></span>
           </div>
           <span className="hidden text-xs font-bold uppercase tracking-[.16em] text-muted-foreground sm:block">The extremely unofficial stress reliever</span>
@@ -125,7 +125,7 @@ function Index() {
                 onDragOver={event => { event.preventDefault(); setIsDragging(true); }}
                 onDragLeave={() => setIsDragging(false)}
                 onDrop={handleDrop}
-                className={`relative aspect-[.79] w-full cursor-crosshair touch-manipulation overflow-hidden outline-none focus-visible:ring-4 focus-visible:ring-ring ${isDragging ? "ring-4 ring-inset ring-highlight" : ""} ${hitShake ? "portrait-hit" : ""}`}
+                className={`relative aspect-[.97] w-full cursor-crosshair touch-manipulation overflow-hidden outline-none focus-visible:ring-4 focus-visible:ring-ring sm:aspect-[.79] ${isDragging ? "ring-4 ring-inset ring-highlight" : ""} ${hitShake ? "portrait-hit" : ""}`}
               >
                 <img src={photo} alt="Current tomato target" className="pointer-events-none h-full w-full select-none object-cover object-center" draggable={false} />
                 <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-foreground/15" />
@@ -135,7 +135,7 @@ function Index() {
               </div>
             </div>
             <div className="flex items-center justify-between border border-stage-border bg-stage px-4 py-3 text-[11px] font-extrabold uppercase tracking-[.16em] text-muted-foreground">
-              <span>← Aim anywhere →</span><span className="text-highlight">No refunds, only tomatoes</span>
+              <span>← Aim anywhere →</span><span className="hidden text-highlight sm:block">No refunds, only tomatoes</span><span className="text-highlight sm:hidden">Take your shot</span>
             </div>
           </section>
 
@@ -145,7 +145,7 @@ function Index() {
                 <p className="mb-1 text-xs font-extrabold uppercase tracking-[.18em] text-muted-foreground">Tomatoes thrown</p>
                 <p className="font-display text-6xl leading-none tabular-nums text-highlight lg:mt-3 lg:text-8xl" aria-live="polite">{String(hits.length).padStart(2, "0")}</p>
               </div>
-              <span className="pb-1 text-3xl lg:mt-4 lg:block" aria-hidden="true">🍅</span>
+              <span className="w-9 pb-1 lg:mt-4 lg:block" aria-hidden="true"><Splat /></span>
             </div>
             <div className="flex gap-3 lg:flex-col">
               <Button variant="tomato" size="lg" className="h-12 min-w-0 flex-1 rounded-sm px-4 text-xs sm:text-sm lg:w-full" onClick={() => fileInput.current?.click()}><ImagePlus /> Change picture</Button>
@@ -157,7 +157,7 @@ function Index() {
         </div>
 
         <footer className="mt-10 flex items-center justify-between border-t border-border pt-4 text-[10px] font-bold uppercase tracking-[.14em] text-muted-foreground lg:mt-14">
-          <span>Made for a little harmless fun</span><span>🍅 &nbsp; Take aim, feel better</span>
+          <span>Made for a little harmless fun</span><span>Take aim, feel better</span>
         </footer>
       </div>
     </main>
