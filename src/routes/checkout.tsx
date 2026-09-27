@@ -39,7 +39,7 @@ function Checkout() {
     const order = Math.random().toString(36).slice(2, 8).toUpperCase();
     setTimeout(() => {
       clear();
-      navigate({ to: "/order-complete", search: { order, name: String(data.get("name")), total: total.toFixed(2) } });
+      navigate({ to: "/order-complete", search: { order, name: String(data.get("name")), total: Math.round(total * 100) / 100 } });
     }, 900);
   };
 
