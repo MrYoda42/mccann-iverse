@@ -11,3 +11,4 @@
 
 - Keep Fruit Toss as a client-side single-page interaction with the fixed uploaded target and local hit state, because the game needs no server or photo-changing controls.
 - Keep Mini McCann catalog imagery attached to product records in the client-side cart module, so the shop and checkout show the same product visuals.
+- Keep the additional games as separate TanStack routes with local, disposable game state, because scores and sessions need no server persistence.

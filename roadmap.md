@@ -5,4 +5,4 @@
 - [x] Add selectable fruits and a health bar that responds to hits.
 - [x] Add a Mini McCann shop with cart and checkout.
 - [x] Add distinct Mini McCann product imagery and more collectible styles to the shop.
-- [ ] Add more playable games using the fixed McCann picture.
+- [x] Add more playable games using the fixed McCann picture.
