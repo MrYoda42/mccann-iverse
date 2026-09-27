@@ -90,7 +90,7 @@ function Index() {
             <span className="font-display text-base uppercase sm:text-xl">Fruit Toss<span className="text-primary">.</span></span>
           </div>
           
-          <Link to="/shop" className="text-xs font-bold uppercase tracking-[.14em] text-highlight">Shop Mini McCanns →</Link>
+          <nav className="flex flex-wrap justify-end gap-x-5 gap-y-2 text-xs font-bold uppercase tracking-[.14em] text-highlight"><Link to="/games" className="hover:text-foreground">More games →</Link><Link to="/shop" className="hover:text-foreground">Shop Mini McCanns →</Link></nav>
         </header>
 
         <div className="grid items-center gap-7 pt-8 lg:grid-cols-[minmax(230px,1fr)_minmax(360px,480px)_minmax(230px,1fr)] lg:gap-10 lg:pt-10">

@@ -98,13 +98,16 @@ function Checkout() {
           <ul className="space-y-4">
             {items.map(i => (
               <li key={i.id} className="flex items-center justify-between gap-3 text-sm">
-                <div>
+                <div className="flex min-w-0 items-center gap-3">
+                  <img src={i.image} alt="" className="h-14 w-14 shrink-0 object-cover" />
+                  <div className="min-w-0">
                   <p className="font-bold">{i.name}</p>
                   <div className="mt-1 flex items-center gap-2 text-muted-foreground">
                     <button type="button" aria-label="Decrease" onClick={() => setQty(i.id, i.qty - 1)}><Minus size={14} /></button>
                     <span className="tabular-nums text-foreground">{i.qty}</span>
                     <button type="button" aria-label="Increase" onClick={() => setQty(i.id, i.qty + 1)}><Plus size={14} /></button>
                     <button type="button" aria-label="Remove" className="ml-2" onClick={() => setQty(i.id, 0)}><Trash2 size={14} /></button>
+                  </div>
                   </div>
                 </div>
                 <span className="tabular-nums">{money(i.price * i.qty)}</span>
