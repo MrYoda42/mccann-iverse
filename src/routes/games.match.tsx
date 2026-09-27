@@ -33,9 +33,11 @@ function Match() {
   const flip = (card: Card) => {
     if (flipped.length === 2 || flipped.includes(card.id) || matched.includes(card.pair)) return;
     if (flipped.length === 0) { setFlipped([card.id]); return; }
-    setFlipped([flipped[0], card.id]);
+    const firstId = flipped[0];
+    if (firstId === undefined) return;
+    setFlipped([firstId, card.id]);
     setMoves(m => m + 1);
-    const first = deck.find(c => c.id === flipped[0]);
+    const first = deck.find(c => c.id === firstId);
     if (first?.pair === card.pair) {
       timeout.current = setTimeout(() => { setMatched(m => [...m, card.pair]); setFlipped([]); }, 450);
     } else timeout.current = setTimeout(() => setFlipped([]), 900);
@@ -44,7 +46,14 @@ function Match() {
   const reset = () => {
     if (timeout.current) clearTimeout(timeout.current);
     const order = [...faces.keys(), ...faces.keys()];
-    for (let i = order.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; }
+    for (let i = order.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const current = order[i];
+      const swap = order[j];
+      if (current === undefined || swap === undefined) continue;
+      order[i] = swap;
+      order[j] = current;
+    }
     setDeck(makeDeck(order)); setFlipped([]); setMatched([]); setMoves(0);
   };
 
@@ -60,8 +69,9 @@ function Match() {
       <div className="grid grid-cols-4 gap-2 sm:gap-3" aria-label="Memory cards">
         {deck.map(card => {
           const showing = flipped.includes(card.id) || matched.includes(card.pair);
-          return <Button key={card.id} type="button" variant="utility" onClick={() => flip(card)} disabled={matched.includes(card.pair)} aria-label={showing ? faces[card.pair].name : `Hidden card ${card.id + 1}`} aria-pressed={showing} className={`relative aspect-square h-auto w-full overflow-hidden rounded-sm p-0 ${showing ? "border-highlight" : "hover:border-highlight"}`}>
-            {showing ? <img src={faces[card.pair].image} alt="" className="h-full w-full object-cover" /> : <span className="font-display text-3xl text-highlight sm:text-5xl">?</span>}
+          const face = faces[card.pair];
+          return <Button key={card.id} type="button" variant="utility" onClick={() => flip(card)} disabled={matched.includes(card.pair)} aria-label={showing ? (face?.name ?? "McCann") : `Hidden card ${card.id + 1}`} aria-pressed={showing} className={`relative aspect-square h-auto w-full overflow-hidden rounded-sm p-0 ${showing ? "border-highlight" : "hover:border-highlight"}`}>
+            {showing && face ? <img src={face.image} alt="" className="h-full w-full object-cover" /> : <span className="font-display text-3xl text-highlight sm:text-5xl">?</span>}
           </Button>;
         })}
       </div>
