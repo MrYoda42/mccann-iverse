@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useRef, useState, type CSSProperties, type PointerEvent } from "react";
 import { RotateCcw, Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -89,8 +89,8 @@ function Index() {
             <span className="flex size-10 items-center justify-center rounded-full border-2 border-highlight text-highlight" aria-hidden="true"><Target size={22} strokeWidth={2.5} /></span>
             <span className="font-display text-base uppercase sm:text-xl">Fruit Toss<span className="text-primary">.</span></span>
           </div>
-          <span className="hidden text-xs font-bold uppercase tracking-[.16em] text-muted-foreground sm:block">The extremely unofficial stress reliever</span>
-          <span className="text-xs font-bold uppercase text-highlight sm:hidden">Est. right now</span>
+          
+          <Link to="/shop" className="text-xs font-bold uppercase tracking-[.14em] text-highlight">Shop Mini McCanns →</Link>
         </header>
 
         <div className="grid items-center gap-7 pt-8 lg:grid-cols-[minmax(230px,1fr)_minmax(360px,480px)_minmax(230px,1fr)] lg:gap-10 lg:pt-10">
