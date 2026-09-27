@@ -1,10 +1,20 @@
 import { useSyncExternalStore } from "react";
+import classicImage from "@/assets/mccann-classic.jpg";
+import deluxeImage from "@/assets/mccann-deluxe.jpg";
+import plushImage from "@/assets/mccann-plush.jpg";
+import pocketImage from "@/assets/mccann-pocket.jpg";
+import rainyImage from "@/assets/mccann-rainy.jpg";
+import arcadeImage from "@/assets/mccann-arcade.jpg";
+import goldImage from "@/assets/mccann-gold.jpg";
 
 export const products = [
-  { id: "classic", name: "Classic Mini McCann", price: 24, blurb: "Hand-painted 4-inch figure. Glasses included, obviously." },
-  { id: "deluxe", name: "Deluxe Mini McCann", price: 39, blurb: "6-inch collector edition with cloudy-sky display base." },
-  { id: "plush", name: "Plush Mini McCann", price: 29, blurb: "Soft, huggable, and only slightly judgmental." },
-  { id: "pocket", name: "Pocket McCann", price: 12, blurb: "Keychain-sized. Take him everywhere." },
+  { id: "classic", name: "Classic Mini McCann", price: 24, blurb: "The original look, reimagined as a little collectible bust.", style: "The original", image: classicImage },
+  { id: "deluxe", name: "Cloud Nine McCann", price: 39, blurb: "Collector figure standing on his own little cloud.", style: "Collector edition", image: deluxeImage },
+  { id: "plush", name: "Plush Mini McCann", price: 29, blurb: "Soft, huggable, and only slightly judgmental.", style: "Soft & squishy", image: plushImage },
+  { id: "pocket", name: "Pocket McCann", price: 12, blurb: "A tiny face charm for your keys and adventures.", style: "Everyday carry", image: pocketImage },
+  { id: "rainy", name: "Rainy Day McCann", price: 32, blurb: "Yellow raincoat, clear umbrella, unbothered by the forecast.", style: "Weather ready", image: rainyImage },
+  { id: "arcade", name: "Arcade McCann", price: 28, blurb: "Varsity jacket on. Controller in hand. Game face activated.", style: "Player one", image: arcadeImage },
+  { id: "gold", name: "Gold Edition McCann", price: 49, blurb: "A little extra shine for the collector shelf.", style: "Limited look", image: goldImage },
 ] as const;
 export type ProductId = typeof products[number]["id"];
 export type Cart = Partial<Record<ProductId, number>>;
