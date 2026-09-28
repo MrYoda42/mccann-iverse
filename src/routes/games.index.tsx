@@ -6,7 +6,7 @@ import portrait from "@/assets/tomato-target.png.asset.json";
 import rainy from "@/assets/mccann-rainy.jpg";
 import arcade from "@/assets/mccann-arcade.jpg";
 
-export const Route = createFileRoute("/games")({
+export const Route = createFileRoute("/games/")({
   head: () => ({ meta: [
     { title: "Games — Mini McCann" },
     { name: "description", content: "Play Fruit Toss, Mini McCann Match, and McCann Pop." },
