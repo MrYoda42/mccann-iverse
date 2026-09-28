@@ -17,6 +17,9 @@ import { Route as ShopRouteImport } from './routes/shop'
 import { Route as GamesIndexRouteImport } from './routes/games.index'
 import { Route as GamesMatchRouteImport } from './routes/games.match'
 import { Route as GamesPopRouteImport } from './routes/games.pop'
+import { Route as SecretIndexRouteImport } from './routes/secret.index'
+import { Route as SecretBlackjackRouteImport } from './routes/secret.blackjack'
+import { Route as SecretPlinkoRouteImport } from './routes/secret.plinko'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -58,6 +61,21 @@ const GamesPopRoute = GamesPopRouteImport.update({
   path: '/games/pop',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SecretIndexRoute = SecretIndexRouteImport.update({
+  id: '/secret/',
+  path: '/secret/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecretBlackjackRoute = SecretBlackjackRouteImport.update({
+  id: '/secret/blackjack',
+  path: '/secret/blackjack',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecretPlinkoRoute = SecretPlinkoRouteImport.update({
+  id: '/secret/plinko',
+  path: '/secret/plinko',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -67,7 +85,10 @@ export interface FileRoutesByFullPath {
   '/shop': typeof ShopRoute
   '/games/match': typeof GamesMatchRoute
   '/games/pop': typeof GamesPopRoute
+  '/secret/blackjack': typeof SecretBlackjackRoute
+  '/secret/plinko': typeof SecretPlinkoRoute
   '/games/': typeof GamesIndexRoute
+  '/secret/': typeof SecretIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -77,7 +98,10 @@ export interface FileRoutesByTo {
   '/shop': typeof ShopRoute
   '/games/match': typeof GamesMatchRoute
   '/games/pop': typeof GamesPopRoute
+  '/secret/blackjack': typeof SecretBlackjackRoute
+  '/secret/plinko': typeof SecretPlinkoRoute
   '/games': typeof GamesIndexRoute
+  '/secret': typeof SecretIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -88,7 +112,10 @@ export interface FileRoutesById {
   '/shop': typeof ShopRoute
   '/games/match': typeof GamesMatchRoute
   '/games/pop': typeof GamesPopRoute
+  '/secret/blackjack': typeof SecretBlackjackRoute
+  '/secret/plinko': typeof SecretPlinkoRoute
   '/games/': typeof GamesIndexRoute
+  '/secret/': typeof SecretIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -100,7 +127,10 @@ export interface FileRouteTypes {
     | '/shop'
     | '/games/match'
     | '/games/pop'
+    | '/secret/blackjack'
+    | '/secret/plinko'
     | '/games/'
+    | '/secret/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -110,7 +140,10 @@ export interface FileRouteTypes {
     | '/shop'
     | '/games/match'
     | '/games/pop'
+    | '/secret/blackjack'
+    | '/secret/plinko'
     | '/games'
+    | '/secret'
   id:
     | '__root__'
     | '/'
@@ -120,7 +153,10 @@ export interface FileRouteTypes {
     | '/shop'
     | '/games/match'
     | '/games/pop'
+    | '/secret/blackjack'
+    | '/secret/plinko'
     | '/games/'
+    | '/secret/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -131,7 +167,10 @@ export interface RootRouteChildren {
   ShopRoute: typeof ShopRoute
   GamesMatchRoute: typeof GamesMatchRoute
   GamesPopRoute: typeof GamesPopRoute
+  SecretBlackjackRoute: typeof SecretBlackjackRoute
+  SecretPlinkoRoute: typeof SecretPlinkoRoute
   GamesIndexRoute: typeof GamesIndexRoute
+  SecretIndexRoute: typeof SecretIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -192,6 +231,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GamesPopRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/secret/': {
+      id: '/secret/'
+      path: '/secret'
+      fullPath: '/secret/'
+      preLoaderRoute: typeof SecretIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/secret/blackjack': {
+      id: '/secret/blackjack'
+      path: '/secret/blackjack'
+      fullPath: '/secret/blackjack'
+      preLoaderRoute: typeof SecretBlackjackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/secret/plinko': {
+      id: '/secret/plinko'
+      path: '/secret/plinko'
+      fullPath: '/secret/plinko'
+      preLoaderRoute: typeof SecretPlinkoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -203,7 +263,10 @@ const rootRouteChildren: RootRouteChildren = {
   ShopRoute: ShopRoute,
   GamesMatchRoute: GamesMatchRoute,
   GamesPopRoute: GamesPopRoute,
+  SecretBlackjackRoute: SecretBlackjackRoute,
+  SecretPlinkoRoute: SecretPlinkoRoute,
   GamesIndexRoute: GamesIndexRoute,
+  SecretIndexRoute: SecretIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
