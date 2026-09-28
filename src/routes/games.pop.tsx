@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowLeft, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -32,6 +32,16 @@ function Pop() {
     return () => { clearInterval(clock); clearInterval(pop); };
   }, [playing]);
   useEffect(() => { if (seconds === 0) { setPlaying(false); setActive(null); } }, [seconds]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    let typed = "";
+    const onKey = (e: KeyboardEvent) => {
+      typed = (typed + e.key).slice(-4);
+      if (typed === "6767") navigate({ to: "/secret" });
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [navigate]);
 
   const start = () => { setSeconds(30); setScore(0); setActive(Math.floor(Math.random() * 9)); setStarted(true); setPlaying(true); };
   const catchMcCann = (index: number) => {
