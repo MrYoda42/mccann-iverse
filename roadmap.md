@@ -6,4 +6,4 @@
 - [x] Add a Mini McCann shop with cart and checkout.
 - [x] Add distinct Mini McCann product imagery and more collectible styles to the shop.
 - [x] Add more playable games using the fixed McCann picture.
-- [x] Log store orders and add the new McCann picture; fix game pages.
+- [x] Log store orders and add the new McCann picture; fix game pages.- [x] Secret "6767" code in McCann Pop opening a play-money casino (Plinko, Blackjack).
