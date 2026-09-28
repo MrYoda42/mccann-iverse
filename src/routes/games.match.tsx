@@ -19,7 +19,7 @@ export const Route = createFileRoute("/games/match")({
 
 const faces = [{ name: "The original", image: portrait.url }, ...products.map(p => ({ name: p.name, image: p.image }))];
 type Card = { id: number; pair: number };
-const initialOrder = [0, 3, 5, 1, 6, 2, 7, 4, 2, 6, 4, 0, 1, 7, 3, 5];
+const initialOrder = [...Array(9).keys(), ...Array(9).keys()];
 const makeDeck = (order: number[]): Card[] => order.map((pair, id) => ({ id, pair }));
 
 function Match() {
@@ -64,9 +64,9 @@ function Match() {
         <div><h1 className="font-display text-3xl uppercase sm:text-5xl">McCann <span className="text-primary">Match.</span></h1><p className="mt-2 text-sm text-muted-foreground">Find the pairs.</p></div>
         <Button type="button" variant="utility" onClick={reset} aria-label="New game" title="New game" className="rounded-sm"><RotateCcw /> New game</Button>
       </div>
-      <div className="my-6 flex justify-between border-y border-border py-3 text-xs font-bold uppercase tracking-[.15em] text-highlight"><span>Pairs {matched.length} / 8</span><span>Moves {moves}</span></div>
-      {matched.length === 8 && <div role="status" className="mb-5 border border-highlight bg-stage p-4 text-center font-display text-lg uppercase text-highlight">All matched in {moves} moves!</div>}
-      <div className="grid grid-cols-4 gap-2 sm:gap-3" aria-label="Memory cards">
+      <div className="my-6 flex justify-between border-y border-border py-3 text-xs font-bold uppercase tracking-[.15em] text-highlight"><span>Pairs {matched.length} / {faces.length}</span><span>Moves {moves}</span></div>
+      {matched.length === faces.length && <div role="status" className="mb-5 border border-highlight bg-stage p-4 text-center font-display text-lg uppercase text-highlight">All matched in {moves} moves!</div>}
+      <div className="grid grid-cols-6 gap-2 sm:gap-3" aria-label="Memory cards">
         {deck.map(card => {
           const showing = flipped.includes(card.id) || matched.includes(card.pair);
           const face = faces[card.pair];

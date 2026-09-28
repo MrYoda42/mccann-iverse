@@ -6,8 +6,10 @@ import pocketImage from "@/assets/mccann-pocket.jpg";
 import rainyImage from "@/assets/mccann-rainy.jpg";
 import arcadeImage from "@/assets/mccann-arcade.jpg";
 import goldImage from "@/assets/mccann-gold.jpg";
+import kidAsset from "@/assets/mccann-kid.png.asset.json";
 
 export const products = [
+  { id: "sunshine", name: "Sunshine McCann", price: 26, blurb: "Yellow tee, glasses on, ready for anything.", style: "New McCann", image: kidAsset.url },
   { id: "classic", name: "Classic Mini McCann", price: 24, blurb: "The original look, reimagined as a little collectible bust.", style: "The original", image: classicImage },
   { id: "deluxe", name: "Cloud Nine McCann", price: 39, blurb: "Collector figure standing on his own little cloud.", style: "Collector edition", image: deluxeImage },
   { id: "plush", name: "Plush Mini McCann", price: 29, blurb: "Soft, huggable, and only slightly judgmental.", style: "Soft & squishy", image: plushImage },
