@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as OrderCompleteRouteImport } from './routes/order-complete'
+import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as GamesIndexRouteImport } from './routes/games.index'
 import { Route as GamesMatchRouteImport } from './routes/games.match'
@@ -32,6 +33,11 @@ const OrderCompleteRoute = OrderCompleteRouteImport.update({
   path: '/order-complete',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OrdersRoute = OrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
@@ -48,15 +54,16 @@ const GamesMatchRoute = GamesMatchRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const GamesPopRoute = GamesPopRouteImport.update({
-  id: '/games/pop',
-  path: '/games/pop',
-  getParentRoute: () => rootRouteImport,
+  id: '/pop',
+  path: '/pop',
+  getParentRoute: () => GamesRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
   '/order-complete': typeof OrderCompleteRoute
+  '/orders': typeof OrdersRoute
   '/shop': typeof ShopRoute
   '/games/match': typeof GamesMatchRoute
   '/games/pop': typeof GamesPopRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
   '/order-complete': typeof OrderCompleteRoute
+  '/orders': typeof OrdersRoute
   '/shop': typeof ShopRoute
   '/games/match': typeof GamesMatchRoute
   '/games/pop': typeof GamesPopRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/checkout': typeof CheckoutRoute
   '/order-complete': typeof OrderCompleteRoute
+  '/orders': typeof OrdersRoute
   '/shop': typeof ShopRoute
   '/games/match': typeof GamesMatchRoute
   '/games/pop': typeof GamesPopRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/checkout'
     | '/order-complete'
+    | '/orders'
     | '/shop'
     | '/games/match'
     | '/games/pop'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/checkout'
     | '/order-complete'
+    | '/orders'
     | '/shop'
     | '/games/match'
     | '/games/pop'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/checkout'
     | '/order-complete'
+    | '/orders'
     | '/shop'
     | '/games/match'
     | '/games/pop'
@@ -115,9 +127,9 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CheckoutRoute: typeof CheckoutRoute
   OrderCompleteRoute: typeof OrderCompleteRoute
+  OrdersRoute: typeof OrdersRoute
   ShopRoute: typeof ShopRoute
   GamesMatchRoute: typeof GamesMatchRoute
-  GamesPopRoute: typeof GamesPopRoute
   GamesIndexRoute: typeof GamesIndexRoute
 }
 
@@ -144,6 +156,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrderCompleteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/orders': {
+      id: '/orders'
+      path: '/orders'
+      fullPath: '/orders'
+      preLoaderRoute: typeof OrdersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/shop': {
       id: '/shop'
       path: '/shop'
@@ -167,10 +186,10 @@ declare module '@tanstack/react-router' {
     }
     '/games/pop': {
       id: '/games/pop'
-      path: '/games/pop'
+      path: '/pop'
       fullPath: '/games/pop'
       preLoaderRoute: typeof GamesPopRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof GamesRoute
     }
   }
 }
@@ -179,9 +198,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CheckoutRoute: CheckoutRoute,
   OrderCompleteRoute: OrderCompleteRoute,
+  OrdersRoute: OrdersRoute,
   ShopRoute: ShopRoute,
   GamesMatchRoute: GamesMatchRoute,
-  GamesPopRoute: GamesPopRoute,
   GamesIndexRoute: GamesIndexRoute,
 }
 export const routeTree = rootRouteImport
