@@ -54,9 +54,9 @@ const GamesMatchRoute = GamesMatchRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const GamesPopRoute = GamesPopRouteImport.update({
-  id: '/pop',
-  path: '/pop',
-  getParentRoute: () => GamesRoute,
+  id: '/games/pop',
+  path: '/games/pop',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -130,6 +130,7 @@ export interface RootRouteChildren {
   OrdersRoute: typeof OrdersRoute
   ShopRoute: typeof ShopRoute
   GamesMatchRoute: typeof GamesMatchRoute
+  GamesPopRoute: typeof GamesPopRoute
   GamesIndexRoute: typeof GamesIndexRoute
 }
 
@@ -186,10 +187,10 @@ declare module '@tanstack/react-router' {
     }
     '/games/pop': {
       id: '/games/pop'
-      path: '/pop'
+      path: '/games/pop'
       fullPath: '/games/pop'
       preLoaderRoute: typeof GamesPopRouteImport
-      parentRoute: typeof GamesRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -201,6 +202,7 @@ const rootRouteChildren: RootRouteChildren = {
   OrdersRoute: OrdersRoute,
   ShopRoute: ShopRoute,
   GamesMatchRoute: GamesMatchRoute,
+  GamesPopRoute: GamesPopRoute,
   GamesIndexRoute: GamesIndexRoute,
 }
 export const routeTree = rootRouteImport
