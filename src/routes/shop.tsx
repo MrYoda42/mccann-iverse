@@ -24,15 +24,15 @@ function Shop() {
     <main className="min-h-screen bg-background text-foreground">
       <ShopHeader />
       <div className="mx-auto max-w-[1200px] px-5 py-10 sm:px-9">
-        <p className="text-xs font-extrabold uppercase tracking-[.2em] text-highlight">The mini collection · 7 looks</p>
+        <p className="text-xs font-extrabold uppercase tracking-[.2em] text-highlight">The mini collection · 8 looks</p>
         <h1 className="mt-2 font-display text-[clamp(2.4rem,5vw,4.5rem)] uppercase leading-none">A McCann for <span className="text-primary">every mood.</span></h1>
-        <p className="mt-4 max-w-lg text-muted-foreground">Same familiar face, seven very different little personalities. Pick your favorite.</p>
+        <p className="mt-4 max-w-lg text-muted-foreground">Same familiar face, eight very different little personalities. Pick your favorite.</p>
         <p className="mt-3 text-xs text-muted-foreground">Concept images · Demo checkout only — these are not available to purchase yet.</p>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {products.map(p => (
             <article key={p.id} className="flex flex-col border border-stage-border bg-stage">
               <div className="aspect-square overflow-hidden bg-muted">
-                <img src={p.image} alt={`${p.name} concept product image`} loading="lazy" className="h-full w-full object-cover" />
+                <img src={p.image} alt={`${p.name} concept product image`} loading="lazy" className="h-full w-full object-cover object-top" />
               </div>
               <div className="flex flex-1 flex-col gap-2 p-4">
                 <p className="text-[11px] font-bold uppercase tracking-[.15em] text-highlight">{p.style}</p>

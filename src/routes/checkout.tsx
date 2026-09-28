@@ -4,6 +4,7 @@ import { Minus, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ShopHeader } from "@/components/ShopHeader";
 import { money, useCart } from "@/lib/cart";
+import { logOrder } from "@/lib/orders";
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({
@@ -37,6 +38,14 @@ function Checkout() {
     if (!/^\d{13,19}$/.test(card)) return alert("Please enter a valid card number.");
     setPlacing(true);
     const order = Math.random().toString(36).slice(2, 8).toUpperCase();
+    const g = (k: string) => String(data.get(k) ?? "");
+    logOrder({
+      id: order, date: new Date().toISOString(), name: g("name"), email: g("email"),
+      address: `${g("address")}, ${g("city")}, ${g("state")} ${g("zip")}`,
+      shipping: shipping === "express" ? "Express" : "Standard",
+      items: items.map(i => ({ name: i.name, qty: i.qty, price: i.price })),
+      total: Math.round(total * 100) / 100,
+    });
     setTimeout(() => {
       clear();
       navigate({ to: "/order-complete", search: { order, name: String(data.get("name")), total: Math.round(total * 100) / 100 } });
